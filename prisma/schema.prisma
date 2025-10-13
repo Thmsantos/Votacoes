@@ -10,11 +10,13 @@ datasource db {
 
 model Candidate {
   id        Int      @id @default(autoincrement())
-  name      String
+  name      String   @unique
   votes     Int
+  createdAt DateTime @default(now())
 }
 
 model Votes {
   id        Int      @id @default(autoincrement())
-  id_candidate Int
+  createdAt DateTime @default(now())
+  name      String
 }

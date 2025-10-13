@@ -6,3 +6,11 @@ CREATE TABLE "Candidate" (
 
     CONSTRAINT "Candidate_pkey" PRIMARY KEY ("id")
 );
+
+-- CreateTable
+CREATE TABLE "Votes" (
+    "id" SERIAL NOT NULL,
+    "id_candidate" INTEGER NOT NULL,
+
+    CONSTRAINT "Votes_pkey" PRIMARY KEY ("id")
+);

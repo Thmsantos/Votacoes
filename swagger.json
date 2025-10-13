@@ -1,0 +1,63 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API de Votação",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/create": {
+      "post": {
+        "summary": "Cria um candidato",
+        "security": [{ "ApiKeyAuth": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/CandidateBody" }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Created" },
+          "401": { "description": "Unauthorized" },
+          "409": { "description": "Candidate already exists" }
+        }
+      }
+    },
+    "/candidates": {
+      "get": {
+        "summary": "Lista todos os candidatos",
+        "responses": { "200": { "description": "OK" } }
+      }
+    },
+    "/vote": {
+      "post": {
+        "summary": "Vota em um candidato",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/TakeVoteBody" }
+            }
+          }
+        },
+        "responses": { "201": { "description": "Created" } }
+      }
+    },
+    "/results": {
+      "get": {
+        "summary": "Retorna resultados dos votos",
+        "responses": { "200": { "description": "OK" } }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "ApiKeyAuth": { "type": "apiKey", "in": "header", "name": "api-key" }
+    },
+    "schemas": {
+      "CandidateBody": { "type": "object", "properties": { "name": { "type": "string" } }, "required": ["name"] },
+      "TakeVoteBody": { "type": "object", "properties": { "name": { "type": "string" } }, "required": ["name"] }
+    }
+  }
+}
