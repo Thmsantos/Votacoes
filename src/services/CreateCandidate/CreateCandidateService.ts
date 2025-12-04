@@ -1,22 +1,29 @@
-import { prisma } from "../../db/db";
+import type CandidateRepository from "../../repositories/Candidates/CandidateRepository";
 import type { CandidateBody } from "../../types/types";
 
 export default class CreateCandidateService {
-    public async handle(body: CandidateBody, request: Request) {
-        const API_KEY = process.env.API_KEY;
-        const { name } = body;
+  private candidateRepository: CandidateRepository;
 
-        const key = request.headers.get("api-key");
-        if (key !== API_KEY) return { status: 401, message: "Unauthorized" };
+  constructor(candidateRepository: CandidateRepository) {
+    this.candidateRepository = candidateRepository;
+  }
 
-        const exists = await prisma.candidate.findFirst({ where: { name } });
-        if (exists) return { status: 409, message: "User already exists" };
+  public async execute(body: CandidateBody, request: Request) {
+    const API_KEY = process.env.API_KEY;
+    const { name } = body;
 
-        await prisma.candidate.create({
-            data: { name, votes: 0 },
-        });
-
-        return { status: 201, message: "created" };
+    const key = request.headers.get("api-key");
+    if (key !== API_KEY) {
+      throw new Error("UNAUTHORIZED");
     }
-}
 
+    const exists = await this.candidateRepository.findByName(name);
+    if (exists) {
+      throw new Error("USER_EXISTS");
+    }
+
+    await this.candidateRepository.create(name);
+
+    return true;
+  }
+}

@@ -1,24 +1,24 @@
-import { prisma } from "../../db/db";
+import type TakeVoteRepository from "../../repositories/TakeVote/TakeVoteRepository";
 import type { TakeVoteBody } from "../../types/types";
 
 export default class TakeVoteService {
-    public async handle(body: TakeVoteBody) {
-        const { name } = body;
+  private takeVoteRepository: TakeVoteRepository;
 
-        try {
-            const exists = await prisma.candidate.findFirst({ where: { name } });
-            if (!exists) return { status: 404, message: "Candidate not found" };
+  constructor(takeVoteRepository: TakeVoteRepository) {
+    this.takeVoteRepository = takeVoteRepository;
+  }
 
-            await prisma.votes.create({ data: { name } });
+  public async execute(body: TakeVoteBody) {
+    const { name } = body;
 
-            await prisma.candidate.update({
-                where: { name },
-                data: { votes: { increment: 1 } },
-            });
-
-            return { status: 201, message: "created" };
-        } catch (error) {
-            return { status: 500, message: error };
-        }
+    const exists = await this.takeVoteRepository.findCandidateByName(name);
+    if (!exists) {
+      throw new Error("CANDIDATE NOT FOUND");
     }
+
+    await this.takeVoteRepository.createVote(name);
+    await this.takeVoteRepository.incrementCandidateVote(name);
+
+    return true;
+  }
 }

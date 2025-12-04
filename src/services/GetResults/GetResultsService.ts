@@ -1,17 +1,13 @@
-import { prisma } from "../../db/db";
+import type CandidateRepository from "../../repositories/Candidates/CandidateRepository";
 
 export default class GetResultsService {
-    public async handle() {
-        try {
-            const candidates = await prisma.candidate.findMany({
-                select: { name: true, votes: true },
-                orderBy: { votes: "desc" }
-            });
+  private candidateRepository: CandidateRepository;
 
-            return { status: 200, data: candidates };
-        } catch (error) {
-            return { status: 500, message: error };
-        }
-    }
+  constructor(candidateRepository: CandidateRepository) {
+    this.candidateRepository = candidateRepository;
+  }
+
+  public async execute() {
+    return this.candidateRepository.findResults();
+  }
 }
-
