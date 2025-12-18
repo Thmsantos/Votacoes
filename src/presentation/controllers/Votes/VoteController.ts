@@ -9,7 +9,7 @@ export default class TakeVoteController {
         this.takeVoteService = takeVoteService;
     }
 
-    public async vote(ctx: Context<{ body: VotesBody }>) {
+    public async handle(ctx: Context<{ body: VotesBody }>) {
         try {
             await this.takeVoteService.execute(ctx.body);
 

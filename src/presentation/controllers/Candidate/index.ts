@@ -1,10 +1,12 @@
 import { createCandidateService } from "../../../core/services/Candidate/CreateCandidate";
 import { getCandidatesService } from "../../../core/services/Candidate/GetCandidatesService";
-import { getResultsService } from "../../../core/services/Candidate/GetResults";
-import CandidateController from "./CandidateController";
+import CreateCandidateController from "./CreateCandidateController";
+import ListCandidateController from "./ListCandidateController";
 
-export const candidateController = new CandidateController(
-    createCandidateService,
+export const listCandidateController = new ListCandidateController(
     getCandidatesService,
-    getResultsService,
+);
+
+export const createCandidateController = new CreateCandidateController(
+    createCandidateService,
 );
