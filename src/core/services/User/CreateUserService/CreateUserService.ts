@@ -17,7 +17,10 @@ export default class CreateUserService {
             throw new Error("USER ALREADY EXISTS");
         }
 
-        const user = await this.userRepository.create(username, password);
+        const user = await this.userRepository.create(
+            username,
+            password.trim(),
+        );
         delete user.password;
         return user;
     }
