@@ -17,5 +17,4 @@ export type userBody = typeof createUserSchema.static;
 
 export interface CreateUserInput {
     body: userBody;
-    request: Request;
 }

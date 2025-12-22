@@ -8,7 +8,7 @@ export default class CreateUserController implements Controller<
     CreateUserInput,
     HttpResponse
 > {
-    private createUserService;
+    private createUserService: CreateUserService;
 
     constructor(createUserService: CreateUserService) {
         this.createUserService = createUserService;
