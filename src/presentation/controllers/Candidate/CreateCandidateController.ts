@@ -19,10 +19,16 @@ export default class CreateCandidateController implements Controller<
         ctx: Context<{ body: CandidateBody }>,
     ): Promise<HttpResponse> {
         try {
-            await this.createCandidateService.execute(ctx.body, ctx.request);
+            const candidate = await this.createCandidateService.execute(
+                ctx.body,
+                ctx.request,
+            );
 
             ctx.set.status = 201;
-            return { status: Number(ctx.status), body: { message: "created" } };
+            return {
+                status: Number(ctx.status),
+                body: { message: "created", candidate },
+            };
         } catch (error) {
             if (error instanceof Error) {
                 if (error.message === "UNAUTHORIZED") {

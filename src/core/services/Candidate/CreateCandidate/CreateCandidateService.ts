@@ -22,8 +22,8 @@ export default class CreateCandidateService {
             throw new Error("USER_EXISTS");
         }
 
-        await this.candidateRepository.create(name);
+        const candidate = await this.candidateRepository.create(name);
 
-        return true;
+        return candidate;
     }
 }
