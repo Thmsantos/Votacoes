@@ -14,7 +14,7 @@ export default class CreateUserService {
         const userExists = await this.userRepository.findByUserName(username);
 
         if (userExists) {
-            throw new Error("USER ALREADY EXISTS");
+            throw new Error("USER_EXISTS");
         }
 
         const user = await this.userRepository.create(
