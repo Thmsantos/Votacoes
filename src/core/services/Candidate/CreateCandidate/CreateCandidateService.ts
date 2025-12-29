@@ -1,4 +1,4 @@
-import type CandidateRepository from "../../../../domain/repositories/Candidates/CandidateRepository";
+import type CandidateRepository from "../../../../infra/repositories/Candidates/CandidateRepository";
 import type { CandidateBody } from "../../../value_objects/types/types";
 
 export default class CreateCandidateService {

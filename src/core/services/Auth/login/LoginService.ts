@@ -1,4 +1,4 @@
-import type UserRepository from "../../../../domain/repositories/User/UserRepository";
+import type UserRepository from "../../../../infra/repositories/User/UserRepository";
 
 export default class LoginService {
     private userRepository: UserRepository;
@@ -8,7 +8,7 @@ export default class LoginService {
     }
 
     public async execute(username: string, password: string) {
-        const user = await this.userRepository.findByUserName(username);
+        const user = await this.userRepository.findByUsername(username);
 
         if (password.trim() !== user.password) {
             throw new Error("invalid credentials");

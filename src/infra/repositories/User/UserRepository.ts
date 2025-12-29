@@ -1,6 +1,7 @@
 import type { PrismaClient } from "@prisma/client";
+import type { UserRepositoryShape } from "../../../domain/repositories/User/UserRepositoryShape";
 
-export default class UserRepository {
+export default class UserRepository implements UserRepositoryShape {
     private db: PrismaClient;
 
     constructor(db: PrismaClient) {
@@ -13,7 +14,7 @@ export default class UserRepository {
         });
     }
 
-    public async findByUserName(username: string) {
+    public async findByUsername(username: string) {
         return this.db.user.findFirst({
             where: { username },
         });

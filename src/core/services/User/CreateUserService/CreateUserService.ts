@@ -1,4 +1,4 @@
-import type UserRepository from "../../../../domain/repositories/User/UserRepository";
+import type UserRepository from "../../../../infra/repositories/User/UserRepository";
 import type { userBody } from "../../../../presentation/controllers/User/types";
 
 export default class CreateUserService {
@@ -11,7 +11,7 @@ export default class CreateUserService {
     public async execute(body: userBody) {
         const { username, password } = body;
 
-        const userExists = await this.userRepository.findByUserName(username);
+        const userExists = await this.userRepository.findByUsername(username);
 
         if (userExists) {
             throw new Error("USER_EXISTS");
