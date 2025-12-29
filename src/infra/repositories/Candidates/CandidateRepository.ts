@@ -1,6 +1,7 @@
 import type { PrismaClient } from "@prisma/client";
+import type { CandidateRepositoryShape } from "../../../domain/repositories/Candidates/CandidateRepositoryShape";
 
-export default class CandidateRepository {
+export default class CandidateRepository implements CandidateRepositoryShape {
     private db: PrismaClient;
 
     constructor(db: PrismaClient) {
