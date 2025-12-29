@@ -12,8 +12,8 @@ export default class CreateCandidateService {
         const API_KEY = process.env.API_KEY;
         const { name } = body;
 
-        const key = request.headers.get("api-key");
-        if (key !== API_KEY) {
+        const key = request.headers.get("API_KEY");
+        if (String(key) !== String(API_KEY)) {
             throw new Error("UNAUTHORIZED");
         }
 
