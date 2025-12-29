@@ -1,5 +1,5 @@
-import { type Context } from "elysia";
 import type GetCandidatesService from "../../../core/services/Candidate/GetCandidatesService/GetCandidatesService";
+import type { HttpResponse } from "../../ports/HttpResponse";
 
 export default class ListCandidateController {
     private getCandidatesService;
@@ -8,14 +8,13 @@ export default class ListCandidateController {
         this.getCandidatesService = getCandidatesService;
     }
 
-    public async handle(ctx: Context) {
+    public async handle(): Promise<HttpResponse> {
         try {
             const candidates = await this.getCandidatesService.execute();
 
-            return { body: { data: candidates }, status: 200 };
+            return { status: 200, body: { data: candidates } };
         } catch (error) {
-            ctx.set.status = 500;
-            return { message: "Internal error", status: 500, error };
+            return { body: { message: "Internal error", error }, status: 500 };
         }
     }
 }
