@@ -1,9 +1,11 @@
 import type { Context } from "elysia";
-import type { CandidateBody } from "../../../core/value_objects/types/types";
-import type CreateCandidateService from "../../../core/services/Candidate/CreateCandidate/CreateCandidateService";
+import type CreateCandidateService from "../../../core/services/Candidate/CreateCandidateService/CreateCandidateService";
 import type { Controller } from "../../ports/Controller";
 import type { HttpResponse } from "../../ports/HttpResponse";
-import type { CreateCandidateInput } from "./types";
+import type {
+    CandidateBody,
+    CreateCandidateInput,
+} from "../../../domain/entities/candidate/types";
 
 export default class CreateCandidateController implements Controller<
     CreateCandidateInput,

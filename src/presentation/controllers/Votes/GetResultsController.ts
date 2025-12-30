@@ -1,4 +1,4 @@
-import type GetResultsService from "../../../core/services/Candidate/GetResults/GetResultsService";
+import type GetResultsService from "../../../core/services/Candidate/GetResultsService/GetResultsService";
 
 export default class GetResultsController {
     constructor(private readonly getResultsService: GetResultsService) {}

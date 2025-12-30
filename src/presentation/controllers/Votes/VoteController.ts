@@ -1,9 +1,11 @@
 import type { Context } from "elysia";
-import type { VotesBody } from "../../../core/value_objects/types/types";
 import TakeVoteService from "../../../core/services/Votes/VotesService";
 import type { Controller } from "../../ports/Controller";
 import type { HttpResponse } from "../../ports/HttpResponse";
-import type { VoteInput } from "./types";
+import type {
+    VoteInput,
+    VotesBody,
+} from "../../../domain/entities/votes/types";
 
 export default class VoteController implements Controller<
     VoteInput,
