@@ -11,7 +11,7 @@ export default class CreateCandidateController implements Controller<
     CreateCandidateInput,
     HttpResponse
 > {
-    private createCandidateService;
+    private createCandidateService: CreateCandidateService;
 
     constructor(createCandidateService: CreateCandidateService) {
         this.createCandidateService = createCandidateService;
@@ -21,9 +21,15 @@ export default class CreateCandidateController implements Controller<
         ctx: Context<{ body: CandidateBody }>,
     ): Promise<HttpResponse> {
         try {
+            const API_KEY = process.env.API_KEY;
+            const key = ctx.request.headers.get("api-key");
+
+            if (String(key) !== String(API_KEY)) {
+                throw new Error("UNAUTHORIZED");
+            }
+
             const candidate = await this.createCandidateService.execute(
                 ctx.body,
-                ctx.request,
             );
 
             return {
@@ -35,14 +41,14 @@ export default class CreateCandidateController implements Controller<
                 if (error.message === "UNAUTHORIZED") {
                     return {
                         status: 401,
-                        body: { message: "Unauthorized", error },
+                        body: { message: "Unauthorized" },
                     };
                 }
 
                 if (error.message === "USER_EXISTS") {
                     return {
                         status: 409,
-                        body: { message: "User already exists", error },
+                        body: { message: "User already exists" },
                     };
                 }
             }

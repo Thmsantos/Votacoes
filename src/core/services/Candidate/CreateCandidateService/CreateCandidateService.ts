@@ -8,16 +8,11 @@ export default class CreateCandidateService {
         this.candidateRepository = candidateRepository;
     }
 
-    public async execute(body: CandidateBody, request: Request) {
-        const API_KEY = process.env.API_KEY;
+    public async execute(body: CandidateBody) {
         const { name } = body;
 
-        const key = request.headers.get("API_KEY");
-        if (String(key) !== String(API_KEY)) {
-            throw new Error("UNAUTHORIZED");
-        }
-
         const exists = await this.candidateRepository.findByName(name);
+        
         if (exists) {
             throw new Error("USER_EXISTS");
         }
