@@ -1,5 +1,5 @@
 import type UserRepository from "../../../../infra/repositories/User/UserRepository";
-import type { userBody } from "../../../../presentation/controllers/User/types";
+import type { userBody } from "../../../../domain/entities/user/types";
 
 export default class CreateUserService {
     private userRepository: UserRepository;

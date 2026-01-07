@@ -1,4 +1,4 @@
-import { getResultsService } from "../../../core/services/Candidate/GetResults";
+import { getResultsService } from "../../../core/services/Candidate/GetResultsService";
 import { votesService } from "../../../core/services/Votes";
 import GetResultsController from "./GetResultsController";
 import VotesController from "./VoteController";

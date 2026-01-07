@@ -1,7 +1,7 @@
 import type { Context } from "elysia";
 import type { Controller } from "../../ports/Controller";
 import type { HttpResponse } from "../../ports/HttpResponse";
-import type { CreateUserInput, userBody } from "./types";
+import type { CreateUserInput, userBody } from "../../../domain/entities/user/types";
 import type CreateUserService from "../../../core/services/User/CreateUserService/CreateUserService";
 
 export default class CreateUserController implements Controller<
