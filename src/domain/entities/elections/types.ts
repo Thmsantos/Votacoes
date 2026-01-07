@@ -25,9 +25,31 @@ export const electionDTOSchema = t.Object({
     adminUserId: t.Integer(),
 });
 
+export const getElectionByIdSchema = t.Object({
+    id: t.Number(),
+});
+
+export const getElectionByNameSchema = t.Object({
+    id: t.String(),
+});
+
 export type electionDTOBody = typeof electionDTOSchema.static;
+
+export type getElectionByIdBody = typeof getElectionByIdSchema.static;
+
+export type getElectionByNameBody = typeof getElectionByNameSchema.static;
 
 export interface electionDTOInput {
     body: electionDTOBody;
+    request: Request;
+}
+
+export interface getElectionByIdInput {
+    body: getElectionByIdBody;
+    request: Request;
+}
+
+export interface getElectionByNameInput {
+    body: getElectionByNameBody;
     request: Request;
 }
