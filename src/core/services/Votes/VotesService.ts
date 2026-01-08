@@ -1,5 +1,5 @@
+import type { VotesBody } from "../../../domain/entities/votes/types";
 import type TakeVoteRepository from "../../../infra/repositories/Votes/VotesRepository";
-import type { VotesBody } from "../../value_objects/types/types";
 
 export default class VotesService {
     private takeVoteRepository: TakeVoteRepository;
