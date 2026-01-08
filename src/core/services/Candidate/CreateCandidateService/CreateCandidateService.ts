@@ -12,7 +12,7 @@ export default class CreateCandidateService {
         const { name } = body;
 
         const exists = await this.candidateRepository.findByName(name);
-        
+
         if (exists) {
             throw new Error("USER_EXISTS");
         }
