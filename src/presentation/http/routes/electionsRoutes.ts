@@ -3,6 +3,7 @@ import {
     createElectionController,
     getElectionsByIdController,
     getElectionsByNameController,
+    joinElectionController,
 } from "../../controllers/Elections";
 import { elysiaAdapter } from "../adapters/adapter";
 import {
@@ -35,4 +36,11 @@ export const electionsRoutes = new Elysia({ prefix: "/elections" })
             request: ctx.request,
         })),
         { body: getElectionByNameSchema },
+    )
+    .post(
+        "/join",
+        elysiaAdapter(joinElectionController, (ctx) => ({
+            body: ctx.body,
+            request: ctx.request,
+        })),
     );

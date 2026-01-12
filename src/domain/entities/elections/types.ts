@@ -33,11 +33,18 @@ export const getElectionByNameSchema = t.Object({
     id: t.String(),
 });
 
+export const joinElectionSchema = t.Object({
+    electionId: t.Number(),
+    key: t.String(),
+});
+
 export type electionDTOBody = typeof electionDTOSchema.static;
 
 export type getElectionByIdBody = typeof getElectionByIdSchema.static;
 
 export type getElectionByNameBody = typeof getElectionByNameSchema.static;
+
+export type joinElectionBody = typeof joinElectionSchema.static;
 
 export interface electionDTOInput {
     body: electionDTOBody;
@@ -51,5 +58,10 @@ export interface getElectionByIdInput {
 
 export interface getElectionByNameInput {
     body: getElectionByNameBody;
+    request: Request;
+}
+
+export interface joinElectionInput {
+    body: joinElectionBody;
     request: Request;
 }
