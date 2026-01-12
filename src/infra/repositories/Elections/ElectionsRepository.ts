@@ -13,7 +13,7 @@ export default class ElectionsRepository implements ElectionsRepositoryShape {
     }
 
     public async create(election: ElectionDTO): Promise<Election> {
-        return this.db.elections.create({ data: { election } });
+        return this.db.elections.create({ data: election });
     }
 
     public async findById(id: number): Promise<Election | null> {

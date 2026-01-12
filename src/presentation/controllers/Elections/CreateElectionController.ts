@@ -41,7 +41,10 @@ export default class CreateElectionController implements Controller<
 
             return {
                 status: 500,
-                body: { message: "internal error" },
+                body: {
+                    message: "internal error",
+                    error: error instanceof Error ? error.message : error,
+                },
             };
         }
     }
