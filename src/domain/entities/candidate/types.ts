@@ -13,6 +13,7 @@ export const candidateSchema = t.Object({
     id: t.Integer(),
     name: t.String(),
     votes: t.Integer(),
+    electionId: t.Integer(),
 });
 
 export interface CreateCandidateInput {
@@ -22,6 +23,7 @@ export interface CreateCandidateInput {
 
 export const createCandidateSchema = t.Object({
     name: t.String(),
+    electionId: t.Integer(),
 });
 
 export type CandidateBody = typeof createCandidateSchema.static;
