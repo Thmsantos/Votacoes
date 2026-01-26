@@ -16,6 +16,7 @@ model Candidate {
   election   Elections @relation(fields: [electionId], references: [id])
   createdAt  DateTime  @default(now())
   updatedAt  DateTime  @default(now())
+
   @@unique([name, electionId])
 }
 
@@ -35,12 +36,12 @@ model User {
 }
 
 model Elections {
-  id           Int      @id @default(autoincrement())
-  name         String
-  key          String
-  adminUserId  Int
-  adminUser    User     @relation(fields: [adminUserId], references: [id])
-  candidates   Candidate[]
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @default(now())
+  id          Int         @id @default(autoincrement())
+  name        String
+  key         String
+  adminUserId Int
+  adminUser   User        @relation(fields: [adminUserId], references: [id])
+  candidates  Candidate[]
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @default(now())
 }

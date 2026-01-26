@@ -1,6 +1,6 @@
 import { t } from "elysia";
 import { type User } from "../user/types";
-import { type CandidateDTO } from "../candidate/types";
+import { candidateSchema, type CandidateDTO } from "../candidate/types";
 
 export type Election = {
     id: number;
@@ -14,14 +14,18 @@ export type Election = {
 };
 
 export type ElectionDTO = {
+    id: number;
     name: string;
     key: string;
+    candidates: CandidateDTO[];
     adminUserId: number;
 };
 
 export const electionDTOSchema = t.Object({
+    id: t.Integer(),
     name: t.String(),
     key: t.String(),
+    candidates: t.Array(candidateSchema),
     adminUserId: t.Integer(),
 });
 

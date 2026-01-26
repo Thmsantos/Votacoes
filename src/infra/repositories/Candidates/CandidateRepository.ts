@@ -14,9 +14,9 @@ export default class CandidateRepository implements CandidateRepositoryShape {
         });
     }
 
-    public async create(name: string) {
+    public async create(name: string, electionId: number) {
         return this.db.candidate.create({
-            data: { name, votes: 0 },
+            data: { name, votes: 0, electionId },
         });
     }
 

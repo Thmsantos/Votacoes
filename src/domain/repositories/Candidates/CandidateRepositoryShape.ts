@@ -7,5 +7,5 @@ export interface CandidateRepositoryShape {
     findByName(name: string): Promise<Candidate | null>;
     findMany(): Promise<Candidate[]>;
     findResults(): Promise<Pick<Candidate, "name" | "votes">[]>;
-    create(name: string): Promise<Candidate>;
+    create(name: string, electionId: number): Promise<Candidate>;
 }

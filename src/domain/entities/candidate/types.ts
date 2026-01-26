@@ -21,9 +21,17 @@ export interface CreateCandidateInput {
     request: Request;
 }
 
+export const electionWithoutKeySchema = t.Object({
+    id: t.Integer(),
+    name: t.String(),
+    candidates: t.Array(candidateSchema),
+    adminUserId: t.Integer(),
+});
+
 export const createCandidateSchema = t.Object({
     name: t.String(),
-    electionId: t.Integer(),
+    election: electionWithoutKeySchema,
+    adminUserId: t.Integer(),
 });
 
 export type CandidateBody = typeof createCandidateSchema.static;

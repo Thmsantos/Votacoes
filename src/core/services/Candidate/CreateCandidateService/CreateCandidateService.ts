@@ -9,16 +9,23 @@ export default class CreateCandidateService {
     }
 
     public async execute(body: CandidateBody) {
-        const { name } = body;
+        const { name, adminUserId, election } = body;
 
-        const exists = await this.candidateRepository.findByName(name);
+        if (adminUserId === election.adminUserId) {
+            const exists = await this.candidateRepository.findByName(name);
 
-        if (exists) {
-            throw new Error("USER_EXISTS");
+            if (exists) {
+                return "candidate already exists";
+            }
+
+            const candidate = await this.candidateRepository.create(
+                name,
+                election.id,
+            );
+
+            return candidate;
         }
 
-        const candidate = await this.candidateRepository.create(name);
-
-        return candidate;
+        return "permission denied";
     }
 }
