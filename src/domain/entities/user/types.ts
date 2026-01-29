@@ -19,9 +19,15 @@ export const createUserSchema = t.Object({
     password: t.String(),
 });
 
+export const getUserSchema = t.Object({
+    username: t.String(),
+});
+
 export type user = typeof userSchema.static;
 
 export type userBody = typeof createUserSchema.static;
+
+export type getUserBody = typeof getUserSchema.static;
 
 export interface CreateUserInput {
     body: userBody;
