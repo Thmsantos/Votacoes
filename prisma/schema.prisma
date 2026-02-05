@@ -23,6 +23,7 @@ model Candidate {
 model Votes {
   id        Int      @id @default(autoincrement())
   name      String
+  electionId Int
   createdAt DateTime @default(now())
 }
 

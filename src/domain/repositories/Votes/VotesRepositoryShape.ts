@@ -1,3 +1,3 @@
 export interface VotesRepositoryShape {
-    createVote(candidateName: string): Promise<void>;
+    createVote(name: string, electionId: number): Promise<void>;
 }

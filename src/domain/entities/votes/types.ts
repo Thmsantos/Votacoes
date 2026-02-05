@@ -8,4 +8,5 @@ export interface VoteInput {
 
 export const VotesSchema = t.Object({
     name: t.String(),
+    electionId: t.Number(),
 });

@@ -14,9 +14,9 @@ export default class VotesRepository implements VotesRepositoryShape {
         });
     }
 
-    createVote(name: string) {
+    createVote(name: string, electionId: number) {
         return this.db.votes.create({
-            data: { name },
+            data: { name, electionId },
         });
     }
 
