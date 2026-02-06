@@ -5,7 +5,7 @@ import type {
     getElectionByNameBody,
     getElectionByNameInput,
 } from "../../../domain/entities/elections/types";
-import type GetElectionsByNameService from "../../../core/services/Elections/GetElectionsByNameService/CreateElectionsService";
+import type GetElectionsByNameService from "../../../core/services/Elections/GetElectionsByNameService/GetElectionsByNameService";
 
 export default class GetElectionsByNameController implements Controller<
     getElectionByNameInput,
@@ -22,7 +22,7 @@ export default class GetElectionsByNameController implements Controller<
     ): Promise<HttpResponse> {
         try {
             const election = await this.getElectionsByNameService.execute(
-                String(ctx.body),
+                String(ctx.body.name),
             );
 
             return { status: 200, body: { data: election } };

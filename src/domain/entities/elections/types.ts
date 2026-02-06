@@ -44,7 +44,7 @@ export const getElectionByIdSchema = t.Object({
 });
 
 export const getElectionByNameSchema = t.Object({
-    id: t.String(),
+    name: t.String(),
 });
 
 export const joinElectionSchema = t.Object({
