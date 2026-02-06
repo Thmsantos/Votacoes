@@ -1,6 +1,6 @@
 import { t } from "elysia";
 import { type User } from "../user/types";
-import { candidateSchema, type CandidateDTO } from "../candidate/types";
+import { type CandidateDTO } from "../candidate/types";
 
 export type Election = {
     id: number;
@@ -17,15 +17,25 @@ export type ElectionDTO = {
     id: number;
     name: string;
     key: string;
-    candidates: CandidateDTO[];
     adminUserId: number;
 };
+
+export type electionDTOWithoutId = {
+    name: string;
+    key: string;
+    adminUserId: number;
+};
+
+export const electionDTOWithoutId = t.Object({
+    name: t.String(),
+    key: t.String(),
+    adminUserId: t.Integer(),
+});
 
 export const electionDTOSchema = t.Object({
     id: t.Integer(),
     name: t.String(),
     key: t.String(),
-    candidates: t.Array(candidateSchema),
     adminUserId: t.Integer(),
 });
 
@@ -42,6 +52,8 @@ export const joinElectionSchema = t.Object({
     key: t.String(),
 });
 
+export type electionDTOBodyWithoutId = typeof electionDTOWithoutId.static;
+
 export type electionDTOBody = typeof electionDTOSchema.static;
 
 export type getElectionByIdBody = typeof getElectionByIdSchema.static;
@@ -52,6 +64,11 @@ export type joinElectionBody = typeof joinElectionSchema.static;
 
 export interface electionDTOInput {
     body: electionDTOBody;
+    request: Request;
+}
+
+export interface electionDTOWithoutIdInput {
+    body: electionDTOBodyWithoutId;
     request: Request;
 }
 

@@ -7,7 +7,7 @@ import {
 } from "../../controllers/Elections";
 import { elysiaAdapter } from "../adapters/adapter";
 import {
-    electionDTOSchema,
+    electionDTOWithoutId,
     getElectionByIdSchema,
     getElectionByNameSchema,
 } from "../../../domain/entities/elections/types";
@@ -19,7 +19,7 @@ export const electionsRoutes = new Elysia({ prefix: "/elections" })
             body: ctx.body,
             request: ctx.request,
         })),
-        { body: electionDTOSchema },
+        { body: electionDTOWithoutId },
     )
     .post(
         "/electionsById",

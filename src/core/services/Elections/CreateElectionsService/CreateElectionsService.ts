@@ -1,6 +1,6 @@
 import type {
     Election,
-    ElectionDTO,
+    electionDTOWithoutId,
 } from "../../../../domain/entities/elections/types";
 import type ElectionsRepository from "../../../../infra/repositories/Elections/ElectionsRepository";
 
@@ -11,7 +11,9 @@ export default class CreateElectionService {
         this.electionsRepository = electionsRepository;
     }
 
-    public async execute(election: ElectionDTO): Promise<Election | null> {
+    public async execute(
+        election: electionDTOWithoutId,
+    ): Promise<Election | null> {
         const exists = await this.electionsRepository.findByName(election.name);
 
         if (exists) {
