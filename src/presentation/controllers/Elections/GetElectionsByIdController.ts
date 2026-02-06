@@ -1,5 +1,5 @@
 import type { Context } from "elysia";
-import type GetElectionsByIdService from "../../../core/services/Elections/GetElectionsByIdService/CreateElectionsService";
+import type GetElectionsByIdService from "../../../core/services/Elections/GetElectionsByIdService/GetElectionsByIdService";
 import type {
     getElectionByIdBody,
     getElectionByIdInput,
@@ -22,7 +22,7 @@ export default class GetElectionsByIdController implements Controller<
     ): Promise<HttpResponse> {
         try {
             const election = await this.getElectionsByIdService.execute(
-                Number(ctx.body),
+                Number(ctx.body.id),
             );
 
             return { status: 200, body: { data: election } };
