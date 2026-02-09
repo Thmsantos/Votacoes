@@ -8,9 +8,14 @@ export default class VotesRepository implements VotesRepositoryShape {
         this.db = db;
     }
 
-    findCandidateByName(name: string) {
-        return this.db.candidate.findFirst({
-            where: { name },
+    findCandidate(name: string, electionId: number) {
+        return this.db.candidate.findUnique({
+            where: {
+                name_electionId: {
+                    name,
+                    electionId,
+                },
+            },
         });
     }
 
@@ -20,9 +25,14 @@ export default class VotesRepository implements VotesRepositoryShape {
         });
     }
 
-    incrementCandidateVote(name: string) {
+    incrementCandidateVote(name: string, electionId: number) {
         return this.db.candidate.update({
-            where: { name },
+            where: {
+                name_electionId: {
+                    name,
+                    electionId,
+                },
+            },
             data: {
                 votes: { increment: 1 },
             },
