@@ -11,13 +11,16 @@ export default class VotesService {
     public async execute(body: VotesBody) {
         const { name, electionId } = body;
 
-        const exists = await this.takeVoteRepository.findCandidateByName(name);
+        const exists = await this.takeVoteRepository.findCandidate(
+            name,
+            electionId,
+        );
         if (!exists) {
-            throw new Error("CANDIDATE NOT FOUND");
+            throw new Error("CANDIDATE_NOT_FOUND");
         }
 
         await this.takeVoteRepository.createVote(name, electionId);
-        await this.takeVoteRepository.incrementCandidateVote(name);
+        await this.takeVoteRepository.incrementCandidateVote(name, electionId);
 
         return true;
     }
