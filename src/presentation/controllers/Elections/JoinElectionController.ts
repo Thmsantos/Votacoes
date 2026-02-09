@@ -34,7 +34,7 @@ export class JoinElectionController implements Controller<
             if (error instanceof Error) {
                 if (error.message === "invalid key") {
                     return {
-                        status: 200,
+                        status: 401,
                         body: { message: "unauthorized" },
                     };
                 }
